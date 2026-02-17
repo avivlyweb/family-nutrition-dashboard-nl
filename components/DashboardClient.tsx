@@ -39,12 +39,14 @@ export function DashboardClient() {
   const [mode, setMode] = useState<ProfileMode>("balanced");
   const [energy, setEnergy] = useState(72);
   const [reduceMotion, setReduceMotion] = useState(false);
+  const [juniorMode, setJuniorMode] = useState(false);
 
   useEffect(() => {
     setUnlocked(isSessionUnlocked());
     const savedMode = window.localStorage.getItem("dashboard_mode") as ProfileMode | null;
     const savedEnergy = Number(window.localStorage.getItem("dashboard_energy"));
     const savedMotion = window.localStorage.getItem("dashboard_reduce_motion");
+    const savedJunior = window.localStorage.getItem("dashboard_junior_mode");
     if (savedMode && ["focus", "balanced", "calm"].includes(savedMode)) {
       setMode(savedMode);
     }
@@ -53,6 +55,9 @@ export function DashboardClient() {
     }
     if (savedMotion === "true") {
       setReduceMotion(true);
+    }
+    if (savedJunior === "true") {
+      setJuniorMode(true);
     }
     setReady(true);
   }, []);
@@ -64,6 +69,10 @@ export function DashboardClient() {
   const trainingCount = week.days.filter((d) => d.workoutType !== "rest").length;
   const complianceScore =
     Object.values(week.complianceChecks).filter(Boolean).length / Object.values(week.complianceChecks).length;
+  const hourNow = new Date().getHours();
+  const nextMealType =
+    hourNow < 10 ? "ontbijt" : hourNow < 14 ? "lunch" : hourNow < 18 ? "snack" : "avondeten";
+  const nextMeal = today.meals.find((meal) => meal.mealType === nextMealType) ?? today.meals[0];
 
   useEffect(() => {
     if (!ready) {
@@ -72,7 +81,8 @@ export function DashboardClient() {
     window.localStorage.setItem("dashboard_mode", mode);
     window.localStorage.setItem("dashboard_energy", String(energy));
     window.localStorage.setItem("dashboard_reduce_motion", String(reduceMotion));
-  }, [mode, energy, reduceMotion, ready]);
+    window.localStorage.setItem("dashboard_junior_mode", String(juniorMode));
+  }, [mode, energy, reduceMotion, juniorMode, ready]);
 
   if (!ready) {
     return <main className="min-h-screen" />;
@@ -91,7 +101,7 @@ export function DashboardClient() {
         <div className="grid gap-4 lg:grid-cols-[1.25fr_1fr] lg:items-center">
           <div>
             <p className="text-xs uppercase tracking-[0.28em] text-accentSoft">Huishoud Planning</p>
-            <h1 className="mt-2 text-3xl font-semibold sm:text-4xl">Weekmenu + Beweging (NL)</h1>
+            <h1 className="mt-2 text-3xl font-semibold sm:text-4xl">{juniorMode ? "Junior Modus" : "Weekmenu + Beweging (NL)"}</h1>
             <p className="mt-3 max-w-2xl text-sm text-muted sm:text-base">Duidelijk weekritme met makkelijke keuzes en rustige visuals.</p>
             <div className="mt-4 flex flex-wrap items-center gap-3">
               <span className="rounded-full border border-emerald-400/35 bg-emerald-500/20 px-3 py-1 text-xs font-semibold text-emerald-200">
@@ -100,6 +110,11 @@ export function DashboardClient() {
               <span className="rounded-full border border-cyan-400/35 bg-cyan-500/20 px-3 py-1 text-xs font-semibold text-cyan-200">
                 Donkere modus
               </span>
+              {juniorMode ? (
+                <span className="rounded-full border border-yellow-300/40 bg-yellow-400/20 px-3 py-1 text-xs font-semibold text-yellow-100">
+                  Junior
+                </span>
+              ) : null}
               <LogoutButton />
             </div>
             <div className="mt-4 flex flex-wrap gap-2">
@@ -152,6 +167,15 @@ export function DashboardClient() {
                 />
                 Minder animatie
               </label>
+              <label className="mt-2 flex items-center gap-2 text-xs text-muted">
+                <input
+                  type="checkbox"
+                  checked={juniorMode}
+                  onChange={(e) => setJuniorMode(e.target.checked)}
+                  className="accent-orange-400"
+                />
+                Junior mode (eenvoudig)
+              </label>
             </div>
           </div>
           <ThreeHero />
@@ -173,30 +197,67 @@ export function DashboardClient() {
           </div>
         </article>
         <article className="card-lift rounded-xl2 border border-ring/20 bg-card/50 p-4">
-          <p className="text-xs uppercase tracking-[0.16em] text-accentSoft">Ritme status</p>
-          <div className="mt-3 grid grid-cols-3 gap-2 text-center">
-            <div className="rounded-lg border border-ring/15 bg-panel/55 p-3">
-              <p className="text-lg font-semibold">{trainingCount}</p>
-              <p className="text-xs text-muted">Trainingsdagen</p>
+          {juniorMode ? (
+            <>
+              <p className="text-xs uppercase tracking-[0.16em] text-accentSoft">Volgende stap</p>
+              <div className="mt-3 rounded-lg border border-ring/15 bg-panel/55 p-3">
+                <div className="flex items-center gap-2">
+                  <MealIcon type={nextMeal.mealType} />
+                  <p className="font-semibold capitalize">{nextMeal.mealType}</p>
+                </div>
+                <p className="mt-2 text-sm text-muted">Kies 1 van deze producten:</p>
+                <ul className="mt-1 space-y-1 text-sm">
+                  {nextMeal.items.slice(0, 3).map((id) => {
+                    const product = productList.find((p) => p.id === id);
+                    return <li key={id}>• {product?.name ?? id}</li>;
+                  })}
+                </ul>
+              </div>
+            </>
+          ) : (
+            <div>
+              <p className="text-xs uppercase tracking-[0.16em] text-accentSoft">Ritme status</p>
+              <div className="mt-3 grid grid-cols-3 gap-2 text-center">
+                <div className="rounded-lg border border-ring/15 bg-panel/55 p-3">
+                  <p className="text-lg font-semibold">{trainingCount}</p>
+                  <p className="text-xs text-muted">Trainingsdagen</p>
+                </div>
+                <div className="rounded-lg border border-ring/15 bg-panel/55 p-3">
+                  <p className="text-lg font-semibold">{Math.round(complianceScore * 100)}%</p>
+                  <p className="text-xs text-muted">Naleving</p>
+                </div>
+                <div className="rounded-lg border border-ring/15 bg-panel/55 p-3">
+                  <p className="text-lg font-semibold">{energy}%</p>
+                  <p className="text-xs text-muted">Energie</p>
+                </div>
+              </div>
             </div>
-            <div className="rounded-lg border border-ring/15 bg-panel/55 p-3">
-              <p className="text-lg font-semibold">{Math.round(complianceScore * 100)}%</p>
-              <p className="text-xs text-muted">Naleving</p>
-            </div>
-            <div className="rounded-lg border border-ring/15 bg-panel/55 p-3">
-              <p className="text-lg font-semibold">{energy}%</p>
-              <p className="text-xs text-muted">Energie</p>
-            </div>
-          </div>
+          )}
         </article>
       </section>
 
-      <WeekBoard week={week} products={productList} />
+      {juniorMode ? (
+        <section className="rounded-xl2 border border-ring/20 bg-card/50 p-4">
+          <p className="text-xs uppercase tracking-[0.16em] text-accentSoft">Deze week</p>
+          <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+            {week.days.map((day) => (
+              <div key={day.day} className="rounded-lg border border-ring/15 bg-panel/55 p-2">
+                <p className="text-sm font-semibold capitalize">{day.day}</p>
+                <p className="text-xs text-muted mt-1">Workout: {day.workoutType.toUpperCase()}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      ) : (
+        <>
+          <WeekBoard week={week} products={productList} />
 
-      <section className="grid gap-4 xl:grid-cols-[1.15fr_0.85fr]">
-        <StoreShoppingList list={week.shoppingListByStore} />
-        <ComplianceMeter checks={week.complianceChecks} />
-      </section>
+          <section className="grid gap-4 xl:grid-cols-[1.15fr_0.85fr]">
+            <StoreShoppingList list={week.shoppingListByStore} />
+            <ComplianceMeter checks={week.complianceChecks} />
+          </section>
+        </>
+      )}
 
       <footer className="rounded-xl2 border border-ring/20 bg-card/45 p-4 text-xs text-muted">
         Dit dashboard ondersteunt planning en is geen medisch advies. Bespreek energie-inname bij jongeren altijd met ouder/verzorger en
