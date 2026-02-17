@@ -12,9 +12,10 @@ export function WeekBoard({ week, products }: Props) {
 
   return (
     <section className="grid-board rounded-[1.25rem] border border-ring/25 bg-panel/45 p-3 sm:p-5">
-      <div className="grid gap-4 xl:grid-cols-7">
+      <p className="mb-3 text-xs uppercase tracking-[0.16em] text-accentSoft">Weekoverzicht (vriendelijke weergave)</p>
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         {week.days.map((day) => (
-          <article key={day.day} className="rounded-xl2 border border-ring/20 bg-card/50 p-3">
+          <article key={day.day} className="card-lift rounded-xl2 border border-ring/20 bg-card/50 p-3">
             <header className="mb-2 flex items-center justify-between gap-2">
               <h3 className="text-base font-semibold capitalize">{day.day}</h3>
               <WorkoutBadge type={day.workoutType} />

@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --bg: 225 28% 8%;
-  --panel: 224 27% 11%;
-  --card: 221 24% 14%;
+  --bg: 222 35% 10%;
+  --panel: 221 32% 14%;
+  --card: 220 27% 18%;
   --text: 34 50% 95%;
-  --muted: 220 11% 68%;
-  --ring: 28 74% 52%;
+  --muted: 218 14% 74%;
+  --ring: 30 78% 58%;
   --accent: 30 87% 58%;
-  --accent-soft: 40 72% 78%;
+  --accent-soft: 46 85% 82%;
 }
 
 * {
@@ -41,9 +41,9 @@ h4 {
 
 .grid-board {
   background-image:
-    linear-gradient(to right, hsl(var(--ring) / 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, hsl(var(--ring) / 0.08) 1px, transparent 1px);
-  background-size: 22px 22px;
+    linear-gradient(to right, hsl(var(--ring) / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--ring) / 0.06) 1px, transparent 1px);
+  background-size: 30px 30px;
 }
 
 @keyframes enterUp {
@@ -69,7 +69,7 @@ h4 {
 }
 
 .card-lift:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   border-color: hsl(var(--ring) / 0.5);
-  box-shadow: 0 16px 34px -26px hsl(var(--accent) / 0.8);
+  box-shadow: 0 16px 34px -24px hsl(var(--accent) / 0.65);
 }

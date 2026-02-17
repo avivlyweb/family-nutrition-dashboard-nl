@@ -8,6 +8,7 @@ import { PinGate } from "@/components/PinGate";
 import { StoreShoppingList } from "@/components/StoreShoppingList";
 import { ThreeHero } from "@/components/ThreeHero";
 import { WeekBoard } from "@/components/WeekBoard";
+import { MealIcon } from "@/components/FriendlyIcons";
 import { isSessionUnlocked } from "@/lib/client/pin-auth";
 import { generateWeekPlan } from "@/lib/menu/generate-week-plan";
 import type { ProductItem } from "@/lib/types";
@@ -91,10 +92,7 @@ export function DashboardClient() {
           <div>
             <p className="text-xs uppercase tracking-[0.28em] text-accentSoft">Huishoud Planning</p>
             <h1 className="mt-2 text-3xl font-semibold sm:text-4xl">Weekmenu + Beweging (NL)</h1>
-            <p className="mt-3 max-w-2xl text-sm text-muted sm:text-base">
-              Focus: veilig vetverlies met groeiruimte, plus extra koolhydraten op trainingsdagen. Producten zijn gekozen op basis
-              van assortimenten bij Jumbo/Lidl (Hoofddorp) met vervangopties.
-            </p>
+            <p className="mt-3 max-w-2xl text-sm text-muted sm:text-base">Duidelijk weekritme met makkelijke keuzes en rustige visuals.</p>
             <div className="mt-4 flex flex-wrap items-center gap-3">
               <span className="rounded-full border border-emerald-400/35 bg-emerald-500/20 px-3 py-1 text-xs font-semibold text-emerald-200">
                 Prive board
@@ -103,6 +101,19 @@ export function DashboardClient() {
                 Donkere modus
               </span>
               <LogoutButton />
+            </div>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {[
+                ["ontbijt", "Ontbijt"],
+                ["lunch", "Lunch"],
+                ["snack", "Snack"],
+                ["avondeten", "Avond"],
+              ].map(([type, label]) => (
+                <span key={type} className="inline-flex items-center gap-1.5 rounded-full border border-ring/20 bg-panel/60 px-2.5 py-1 text-xs">
+                  <MealIcon type={type as "ontbijt" | "lunch" | "snack" | "avondeten"} />
+                  {label}
+                </span>
+              ))}
             </div>
             <div className="mt-4 rounded-xl border border-ring/20 bg-card/50 p-3">
               <p className="text-xs uppercase tracking-[0.16em] text-accentSoft">Persoonlijke stijl zonder namen</p>
@@ -151,12 +162,12 @@ export function DashboardClient() {
         <article className="card-lift rounded-xl2 border border-ring/20 bg-card/50 p-4">
           <p className="text-xs uppercase tracking-[0.16em] text-accentSoft">Vandaag in beeld</p>
           <h2 className="mt-1 text-xl font-semibold capitalize">{today.day}</h2>
-          <p className="mt-1 text-sm text-muted">Workout: {today.workoutType.toUpperCase()} • Doelband: {today.kcalBand}</p>
+          <p className="mt-1 text-sm text-muted">Workout: {today.workoutType.toUpperCase()}</p>
           <div className="mt-3 grid gap-2 sm:grid-cols-2">
             {today.meals.map((meal) => (
               <div key={meal.mealType} className="rounded-lg border border-ring/15 bg-panel/55 p-2 text-xs">
                 <p className="font-semibold text-accentSoft">{meal.mealType}</p>
-                <p className="mt-1 text-muted">{meal.items.length} producten</p>
+                <p className="mt-1 text-muted">{meal.items.length} items</p>
               </div>
             ))}
           </div>

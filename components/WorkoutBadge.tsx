@@ -1,4 +1,5 @@
 import type { WorkoutType } from "@/lib/types";
+import { WorkoutIcon } from "@/components/FriendlyIcons";
 
 const LABEL: Record<WorkoutType, string> = {
   hiit: "HIIT",
@@ -13,5 +14,10 @@ const CLASS_BY_TYPE: Record<WorkoutType, string> = {
 };
 
 export function WorkoutBadge({ type }: { type: WorkoutType }) {
-  return <span className={`rounded-full border px-2.5 py-1 text-xs font-semibold ${CLASS_BY_TYPE[type]}`}>{LABEL[type]}</span>;
+  return (
+    <span className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-semibold ${CLASS_BY_TYPE[type]}`}>
+      <WorkoutIcon type={type} />
+      {LABEL[type]}
+    </span>
+  );
 }
