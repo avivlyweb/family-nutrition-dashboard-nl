@@ -12,17 +12,66 @@ import { isSessionUnlocked } from "@/lib/client/pin-auth";
 import { generateWeekPlan } from "@/lib/menu/generate-week-plan";
 import type { ProductItem } from "@/lib/types";
 
+type ProfileMode = "focus" | "balanced" | "calm";
+
+const MODE_LABEL: Record<ProfileMode, string> = {
+  focus: "Strak schema",
+  balanced: "Gebalanceerd",
+  calm: "Rustige week",
+};
+
+const MODE_TEXT: Record<ProfileMode, string> = {
+  focus: "Accent op structuur en trainingsmomenten.",
+  balanced: "Stabiel tempo met ruimte voor flexibiliteit.",
+  calm: "Minder prikkels, duidelijk en overzichtelijk.",
+};
+
+const MODE_ACCENT: Record<ProfileMode, string> = {
+  focus: "30 87% 58%",
+  balanced: "164 64% 47%",
+  calm: "201 90% 58%",
+};
+
 export function DashboardClient() {
   const [unlocked, setUnlocked] = useState(false);
   const [ready, setReady] = useState(false);
+  const [mode, setMode] = useState<ProfileMode>("balanced");
+  const [energy, setEnergy] = useState(72);
+  const [reduceMotion, setReduceMotion] = useState(false);
 
   useEffect(() => {
     setUnlocked(isSessionUnlocked());
+    const savedMode = window.localStorage.getItem("dashboard_mode") as ProfileMode | null;
+    const savedEnergy = Number(window.localStorage.getItem("dashboard_energy"));
+    const savedMotion = window.localStorage.getItem("dashboard_reduce_motion");
+    if (savedMode && ["focus", "balanced", "calm"].includes(savedMode)) {
+      setMode(savedMode);
+    }
+    if (Number.isFinite(savedEnergy) && savedEnergy >= 30 && savedEnergy <= 100) {
+      setEnergy(savedEnergy);
+    }
+    if (savedMotion === "true") {
+      setReduceMotion(true);
+    }
     setReady(true);
   }, []);
 
   const week = useMemo(() => generateWeekPlan(), []);
   const productList = products as ProductItem[];
+  const todayKey = new Intl.DateTimeFormat("nl-NL", { weekday: "long" }).format(new Date()).toLowerCase();
+  const today = week.days.find((day) => day.day === todayKey) ?? week.days[0];
+  const trainingCount = week.days.filter((d) => d.workoutType !== "rest").length;
+  const complianceScore =
+    Object.values(week.complianceChecks).filter(Boolean).length / Object.values(week.complianceChecks).length;
+
+  useEffect(() => {
+    if (!ready) {
+      return;
+    }
+    window.localStorage.setItem("dashboard_mode", mode);
+    window.localStorage.setItem("dashboard_energy", String(energy));
+    window.localStorage.setItem("dashboard_reduce_motion", String(reduceMotion));
+  }, [mode, energy, reduceMotion, ready]);
 
   if (!ready) {
     return <main className="min-h-screen" />;
@@ -33,11 +82,14 @@ export function DashboardClient() {
   }
 
   return (
-    <main className="mx-auto max-w-[1600px] space-y-6 px-3 py-4 sm:px-6 sm:py-8">
+    <main
+      className={`mx-auto max-w-[1600px] space-y-6 px-3 py-4 sm:px-6 sm:py-8 ${reduceMotion ? "" : "animate-enter"}`}
+      style={{ ["--accent" as string]: MODE_ACCENT[mode] }}
+    >
       <header className="rounded-[1.4rem] border border-ring/25 bg-panel/55 p-4 sm:p-6">
         <div className="grid gap-4 lg:grid-cols-[1.25fr_1fr] lg:items-center">
           <div>
-            <p className="text-xs uppercase tracking-[0.28em] text-accentSoft">Familie Planning</p>
+            <p className="text-xs uppercase tracking-[0.28em] text-accentSoft">Huishoud Planning</p>
             <h1 className="mt-2 text-3xl font-semibold sm:text-4xl">Weekmenu + Beweging (NL)</h1>
             <p className="mt-3 max-w-2xl text-sm text-muted sm:text-base">
               Focus: veilig vetverlies met groeiruimte, plus extra koolhydraten op trainingsdagen. Producten zijn gekozen op basis
@@ -45,17 +97,88 @@ export function DashboardClient() {
             </p>
             <div className="mt-4 flex flex-wrap items-center gap-3">
               <span className="rounded-full border border-emerald-400/35 bg-emerald-500/20 px-3 py-1 text-xs font-semibold text-emerald-200">
-                Familieprive
+                Prive board
               </span>
               <span className="rounded-full border border-cyan-400/35 bg-cyan-500/20 px-3 py-1 text-xs font-semibold text-cyan-200">
                 Donkere modus
               </span>
               <LogoutButton />
             </div>
+            <div className="mt-4 rounded-xl border border-ring/20 bg-card/50 p-3">
+              <p className="text-xs uppercase tracking-[0.16em] text-accentSoft">Persoonlijke stijl zonder namen</p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {(Object.keys(MODE_LABEL) as ProfileMode[]).map((item) => (
+                  <button
+                    key={item}
+                    type="button"
+                    onClick={() => setMode(item)}
+                    className={`rounded-full border px-3 py-1 text-xs transition ${
+                      mode === item ? "border-accent bg-accent/20 text-text" : "border-ring/25 bg-panel text-muted"
+                    }`}
+                  >
+                    {MODE_LABEL[item]}
+                  </button>
+                ))}
+              </div>
+              <p className="mt-2 text-xs text-muted">{MODE_TEXT[mode]}</p>
+              <div className="mt-3">
+                <label className="text-xs text-muted">Dagenergie: {energy}%</label>
+                <input
+                  type="range"
+                  min={30}
+                  max={100}
+                  value={energy}
+                  onChange={(e) => setEnergy(Number(e.target.value))}
+                  className="mt-1 w-full accent-orange-400"
+                />
+              </div>
+              <label className="mt-2 flex items-center gap-2 text-xs text-muted">
+                <input
+                  type="checkbox"
+                  checked={reduceMotion}
+                  onChange={(e) => setReduceMotion(e.target.checked)}
+                  className="accent-orange-400"
+                />
+                Minder animatie
+              </label>
+            </div>
           </div>
           <ThreeHero />
         </div>
       </header>
+
+      <section className="grid gap-4 xl:grid-cols-[1.05fr_0.95fr]">
+        <article className="card-lift rounded-xl2 border border-ring/20 bg-card/50 p-4">
+          <p className="text-xs uppercase tracking-[0.16em] text-accentSoft">Vandaag in beeld</p>
+          <h2 className="mt-1 text-xl font-semibold capitalize">{today.day}</h2>
+          <p className="mt-1 text-sm text-muted">Workout: {today.workoutType.toUpperCase()} • Doelband: {today.kcalBand}</p>
+          <div className="mt-3 grid gap-2 sm:grid-cols-2">
+            {today.meals.map((meal) => (
+              <div key={meal.mealType} className="rounded-lg border border-ring/15 bg-panel/55 p-2 text-xs">
+                <p className="font-semibold text-accentSoft">{meal.mealType}</p>
+                <p className="mt-1 text-muted">{meal.items.length} producten</p>
+              </div>
+            ))}
+          </div>
+        </article>
+        <article className="card-lift rounded-xl2 border border-ring/20 bg-card/50 p-4">
+          <p className="text-xs uppercase tracking-[0.16em] text-accentSoft">Ritme status</p>
+          <div className="mt-3 grid grid-cols-3 gap-2 text-center">
+            <div className="rounded-lg border border-ring/15 bg-panel/55 p-3">
+              <p className="text-lg font-semibold">{trainingCount}</p>
+              <p className="text-xs text-muted">Trainingsdagen</p>
+            </div>
+            <div className="rounded-lg border border-ring/15 bg-panel/55 p-3">
+              <p className="text-lg font-semibold">{Math.round(complianceScore * 100)}%</p>
+              <p className="text-xs text-muted">Naleving</p>
+            </div>
+            <div className="rounded-lg border border-ring/15 bg-panel/55 p-3">
+              <p className="text-lg font-semibold">{energy}%</p>
+              <p className="text-xs text-muted">Energie</p>
+            </div>
+          </div>
+        </article>
+      </section>
 
       <WeekBoard week={week} products={productList} />
 
