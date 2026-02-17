@@ -262,6 +262,24 @@ export function DashboardClient() {
       <footer className="rounded-xl2 border border-ring/20 bg-card/45 p-4 text-xs text-muted">
         Dit dashboard ondersteunt planning en is geen medisch advies. Bespreek energie-inname bij jongeren altijd met ouder/verzorger en
         een gekwalificeerde professional.
+        <p className="mt-3 inline-flex items-center gap-1.5 text-accentSoft">
+          created with love
+          <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" aria-hidden="true">
+            <path
+              d="M12 21s-6.7-4.4-9.3-8C.8 10.3 1.5 6.6 4.6 5c2.1-1.1 4.8-.4 6.4 1.4C12.6 4.6 15.3 3.9 17.4 5c3.1 1.6 3.8 5.3 1.9 8-2.6 3.6-9.3 8-9.3 8z"
+              fill="currentColor"
+            />
+          </svg>
+          by Aviv at{" "}
+          <a
+            href="https://physiotherapy.ai"
+            target="_blank"
+            rel="noreferrer"
+            className="underline decoration-accent/70 underline-offset-2 hover:text-text"
+          >
+            Avivly
+          </a>
+        </p>
       </footer>
     </main>
   );
