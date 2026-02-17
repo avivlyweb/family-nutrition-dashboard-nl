@@ -1,0 +1,9 @@
+[
+  { "day": "maandag", "workoutType": "hiit", "focus": "benen + wandelen" },
+  { "day": "dinsdag", "workoutType": "hiit", "focus": "armen + wandelen" },
+  { "day": "woensdag", "workoutType": "rest", "focus": "herstel" },
+  { "day": "donderdag", "workoutType": "run", "focus": "mee hardlopen" },
+  { "day": "vrijdag", "workoutType": "rest", "focus": "herstel" },
+  { "day": "zaterdag", "workoutType": "rest", "focus": "herstel" },
+  { "day": "zondag", "workoutType": "hiit", "focus": "buik" }
+]

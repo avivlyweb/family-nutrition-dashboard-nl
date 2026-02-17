@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 225 28% 8%;
+  --panel: 224 27% 11%;
+  --card: 221 24% 14%;
+  --text: 34 50% 95%;
+  --muted: 220 11% 68%;
+  --ring: 28 74% 52%;
+  --accent: 30 87% 58%;
+  --accent-soft: 40 72% 78%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  min-height: 100%;
+  background:
+    radial-gradient(circle at 7% 12%, hsl(var(--accent) / 0.22), transparent 38%),
+    radial-gradient(circle at 85% 17%, hsl(193 70% 55% / 0.18), transparent 35%),
+    radial-gradient(circle at 49% 88%, hsl(90 70% 43% / 0.16), transparent 38%),
+    hsl(var(--bg));
+  color: hsl(var(--text));
+  font-family: "Space Grotesk", "Avenir Next", "Segoe UI", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Sora", "Trebuchet MS", sans-serif;
+  letter-spacing: 0.01em;
+}
+
+.grid-board {
+  background-image:
+    linear-gradient(to right, hsl(var(--ring) / 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--ring) / 0.08) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
