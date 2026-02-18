@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import products from "@/data/products.nl.json";
 import { ComplianceMeter } from "@/components/ComplianceMeter";
 import { LogoutButton } from "@/components/LogoutButton";
@@ -110,6 +111,9 @@ export function DashboardClient() {
               <span className="rounded-full border border-cyan-400/35 bg-cyan-500/20 px-3 py-1 text-xs font-semibold text-cyan-200">
                 Donkere modus
               </span>
+              <Link href="/game" className="rounded-full border border-ring/35 bg-panel px-3 py-1 text-xs font-semibold text-text hover:border-accent">
+                Speel game
+              </Link>
               {juniorMode ? (
                 <span className="rounded-full border border-yellow-300/40 bg-yellow-400/20 px-3 py-1 text-xs font-semibold text-yellow-100">
                   Junior
