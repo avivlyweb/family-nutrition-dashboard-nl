@@ -65,3 +65,27 @@ export interface WeekPlan {
   shoppingListByStore: Record<Store, ShoppingItem[]>;
   complianceChecks: ComplianceChecks;
 }
+
+/* ─── Tips & Tricks layer ─── */
+
+export type TipType = "voeding" | "bereiding" | "training";
+export type EvidenceGrade = "A" | "B" | "C";
+export type TimeOfDay = "morning" | "afternoon" | "evening";
+
+export interface TipTriggers {
+  workoutTypes?: WorkoutType[];
+  mealTypes?: MealOption["mealType"][];
+  categories?: Category[];
+  energyRange?: [number, number];
+  timeOfDay?: TimeOfDay[];
+}
+
+export interface NutritionTip {
+  id: string;
+  type: TipType;
+  title: string;
+  body: string;
+  evidenceGrade: EvidenceGrade;
+  source: string;
+  triggers: TipTriggers;
+}

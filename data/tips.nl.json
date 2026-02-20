@@ -1,0 +1,320 @@
+[
+  {
+    "id": "biet-nitraat-uithoudingsvermogen",
+    "type": "voeding",
+    "title": "Bietensap voor zuurstof",
+    "body": "Een klein glas bietensap in de ochtend verhoogt de stikstofoxide-productie en verbetert het uithoudingsvermogen, vooral bij intensieve training.",
+    "evidenceGrade": "A",
+    "source": "Systematic Review, PMID: diverse meta-analyses",
+    "triggers": {
+      "workoutTypes": ["hiit", "run"],
+      "mealTypes": ["ontbijt"],
+      "timeOfDay": ["morning"]
+    }
+  },
+  {
+    "id": "biet-folaat-bloedarmoede",
+    "type": "voeding",
+    "title": "Folaat uit bieten voorkomt tekorten",
+    "body": "Bieten zijn een natuurlijke bron van folaat (vitamine B9), essentieel voor de aanmaak van rode bloedcellen. Tekort kan megaloblastaire anemie veroorzaken.",
+    "evidenceGrade": "A",
+    "source": "Systematic Review, evidence grade A",
+    "triggers": {
+      "categories": ["groente"],
+      "energyRange": [30, 60],
+      "timeOfDay": ["morning", "afternoon"]
+    }
+  },
+  {
+    "id": "vitc-ijzer-opname",
+    "type": "voeding",
+    "title": "Vitamine C ontgrendelt ijzer",
+    "body": "Combineer vitamine C-rijke groenten (venkel, sugarsnaps) met ijzerbronnen zoals linzen. De vitamine C helpt je lichaam het plantaardige ijzer veel beter op te nemen.",
+    "evidenceGrade": "B",
+    "source": "Klinische voedingsstudies",
+    "triggers": {
+      "mealTypes": ["lunch", "avondeten"],
+      "categories": ["groente", "rauwkost"],
+      "timeOfDay": ["afternoon", "evening"]
+    }
+  },
+  {
+    "id": "eiwit-verzadiging-afvallen",
+    "type": "voeding",
+    "title": "Eiwit houdt je langer vol",
+    "body": "Eiwitrijke maaltijden (25-30% van je calorieën) verhogen het verzadigingsgevoel en het thermisch effect. Je lichaam verbrandt meer energie bij het verwerken van eiwit.",
+    "evidenceGrade": "A",
+    "source": "Meta-analyse, PMID: 34579069",
+    "triggers": {
+      "mealTypes": ["avondeten", "lunch"],
+      "categories": ["eiwit", "zuivel"],
+      "timeOfDay": ["afternoon", "evening"]
+    }
+  },
+  {
+    "id": "volkoren-vezel-vetmassa",
+    "type": "voeding",
+    "title": "Vezel uit volkoren verlaagt vetmassa",
+    "body": "Minstens 25-35 g vezel per dag uit volkorenproducten en peulvruchten is sterk geassocieerd met verlaging van vetmassa en betere bloedsuikerstabiliteit.",
+    "evidenceGrade": "A",
+    "source": "Systematic Review, meerdere meta-analyses",
+    "triggers": {
+      "mealTypes": ["lunch", "ontbijt"],
+      "categories": ["brood", "koolhydraten"]
+    }
+  },
+  {
+    "id": "lage-gi-bloedsuiker",
+    "type": "voeding",
+    "title": "Lage GI voor stabiele energie",
+    "body": "Voedingsmiddelen met een lage glycemische index (zilvervliesrijst, volkoren pasta, linzen) stabiliseren je bloedsuiker en voorkomen energiedips na de maaltijd.",
+    "evidenceGrade": "A",
+    "source": "Systematic Review, PMID: 34348965",
+    "triggers": {
+      "categories": ["koolhydraten"],
+      "mealTypes": ["avondeten", "lunch"],
+      "energyRange": [30, 70]
+    }
+  },
+  {
+    "id": "kwark-post-training",
+    "type": "training",
+    "title": "Kwark na de training",
+    "body": "Magere kwark binnen 30-60 minuten na HIIT of hardlopen levert caseine-eiwit dat langzaam vrijkomt en spierherstel ondersteunt terwijl je slaapt.",
+    "evidenceGrade": "B",
+    "source": "Sportvoedingliteratuur",
+    "triggers": {
+      "workoutTypes": ["hiit", "run"],
+      "mealTypes": ["snack"],
+      "categories": ["zuivel"],
+      "timeOfDay": ["afternoon", "evening"]
+    }
+  },
+  {
+    "id": "banaan-pre-training",
+    "type": "training",
+    "title": "Banaan als pre-workout brandstof",
+    "body": "Een banaan 30-45 minuten voor de training levert snel beschikbare koolhydraten en kalium voor optimale spierfunctie. Ideaal voor HIIT en hardlopen.",
+    "evidenceGrade": "B",
+    "source": "Sportvoedingliteratuur",
+    "triggers": {
+      "workoutTypes": ["hiit", "run"],
+      "categories": ["fruit"],
+      "timeOfDay": ["morning", "afternoon"]
+    }
+  },
+  {
+    "id": "rustdag-calorieen-aanpassen",
+    "type": "training",
+    "title": "Rustdag = minder koolhydraten",
+    "body": "Op rustdagen verbrandt je lichaam minder energie. Verschuif de verhouding naar meer eiwit en groenten, en minder koolhydraten. Je energiebehoefte daalt met ~15-20%.",
+    "evidenceGrade": "B",
+    "source": "Sportvoedingliteratuur",
+    "triggers": {
+      "workoutTypes": ["rest"],
+      "energyRange": [30, 80]
+    }
+  },
+  {
+    "id": "hiit-koolhydraat-timing",
+    "type": "training",
+    "title": "Koolhydraten rond HIIT",
+    "body": "Op HIIT-dagen: eet je koolhydraten (rijst, pasta, aardappelen) binnen 2 uur na de training. Dit vult je glycogeenvoorraden sneller aan dan op andere momenten.",
+    "evidenceGrade": "B",
+    "source": "Meta-analyse sportvoeding",
+    "triggers": {
+      "workoutTypes": ["hiit"],
+      "categories": ["koolhydraten"],
+      "timeOfDay": ["afternoon", "evening"]
+    }
+  },
+  {
+    "id": "hardlopen-zalm-omega3",
+    "type": "training",
+    "title": "Zalm na het hardlopen",
+    "body": "Omega-3 vetzuren uit zalm verminderen ontstekingen na intensief hardlopen en ondersteunen gewrichtsherstel. Plan je zalmdag op of na een hardloopdag.",
+    "evidenceGrade": "B",
+    "source": "Systematic Review omega-3 en sport",
+    "triggers": {
+      "workoutTypes": ["run"],
+      "categories": ["eiwit"],
+      "mealTypes": ["avondeten"]
+    }
+  },
+  {
+    "id": "bieten-roosteren-avond",
+    "type": "bereiding",
+    "title": "Rooster bieten de avond ervoor",
+    "body": "Rooster bieten in aluminiumfolie (200 graden, 45 min) de avond voordat je ze nodig hebt. Ze zijn de volgende dag klaar om koud in salades te gebruiken of warm op te dienen.",
+    "evidenceGrade": "C",
+    "source": "Praktisch keukentip",
+    "triggers": {
+      "categories": ["groente"],
+      "mealTypes": ["avondeten"],
+      "timeOfDay": ["evening"]
+    }
+  },
+  {
+    "id": "banaan-invriezen-smoothie",
+    "type": "bereiding",
+    "title": "Banaan invriezen voor smoothies",
+    "body": "Snijd rijpe bananen in plakjes en vries ze in. Perfect als romige basis voor een pre-workout smoothie, zonder extra suiker of zuivel nodig.",
+    "evidenceGrade": "C",
+    "source": "Praktisch keukentip",
+    "triggers": {
+      "categories": ["fruit"],
+      "mealTypes": ["ontbijt", "snack"]
+    }
+  },
+  {
+    "id": "powersalade-lunchprep",
+    "type": "bereiding",
+    "title": "Power Salade voor de lunch",
+    "body": "Combineer rauwe venkel, sugarsnaps en linzen voor een salade vol ijzer en vitamine C. Bereid linzen in bulk voor op zondag, bewaar ze geportioneerd in de koelkast.",
+    "evidenceGrade": "C",
+    "source": "Voedingssynergie + mealprep",
+    "triggers": {
+      "mealTypes": ["lunch"],
+      "categories": ["rauwkost", "groente"],
+      "timeOfDay": ["morning", "afternoon"]
+    }
+  },
+  {
+    "id": "broccoli-stomen-voedingswaarde",
+    "type": "bereiding",
+    "title": "Stoom broccoli, niet koken",
+    "body": "Stomen behoudt tot 90% van de vitamine C in broccoli, terwijl koken in water tot 50% laat weglekken. Stoom 4-5 minuten tot beetgaar.",
+    "evidenceGrade": "B",
+    "source": "Voedingswetenschappelijk onderzoek",
+    "triggers": {
+      "categories": ["groente"],
+      "mealTypes": ["avondeten"]
+    }
+  },
+  {
+    "id": "rijst-afkoelen-resistent-zetmeel",
+    "type": "bereiding",
+    "title": "Afgekoelde rijst heeft minder calorieën",
+    "body": "Kook zilvervliesrijst en laat het afkoelen in de koelkast. Dit vormt resistent zetmeel: je lichaam neemt minder calorieën op en je darmbacteriën profiteren ervan.",
+    "evidenceGrade": "B",
+    "source": "Voedingswetenschappelijk onderzoek",
+    "triggers": {
+      "categories": ["koolhydraten"],
+      "mealTypes": ["avondeten", "lunch"]
+    }
+  },
+  {
+    "id": "olijfolie-niet-verhitten",
+    "type": "bereiding",
+    "title": "Olijfolie rauw toevoegen",
+    "body": "Voeg extra vierge olijfolie rauw toe aan gerechten na het koken. Zo behoud je de polyfenolen en antioxidanten. Bij hoge temperatuur gaan deze deels verloren.",
+    "evidenceGrade": "B",
+    "source": "Voedingschemie onderzoek",
+    "triggers": {
+      "categories": ["olie"],
+      "mealTypes": ["avondeten"]
+    }
+  },
+  {
+    "id": "noten-portie-hand",
+    "type": "voeding",
+    "title": "Handvol noten = perfecte portie",
+    "body": "25 gram ongezouten noten (een handvol) is de ideale snackportie. Meer dan 50 g per dag levert snel extra calorieën op zonder extra voedingswaarde.",
+    "evidenceGrade": "A",
+    "source": "Voedingsrichtlijn Schijf van Vijf",
+    "triggers": {
+      "mealTypes": ["snack"],
+      "categories": ["noten"],
+      "timeOfDay": ["afternoon"]
+    }
+  },
+  {
+    "id": "water-voor-maaltijd",
+    "type": "voeding",
+    "title": "Water voor de maaltijd",
+    "body": "Een glas water 20-30 minuten voor de maaltijd vermindert de hoeveelheid die je eet met ~13%. Dit helpt bij gewichtsbeheersing zonder hongergevoel.",
+    "evidenceGrade": "B",
+    "source": "RCT voedingsonderzoek",
+    "triggers": {
+      "mealTypes": ["lunch", "avondeten"],
+      "timeOfDay": ["afternoon", "evening"]
+    }
+  },
+  {
+    "id": "kaas-calcium-botten",
+    "type": "voeding",
+    "title": "30+ kaas levert calcium met minder vet",
+    "body": "30+ kaas bevat evenveel calcium als volle kaas, maar met significant minder verzadigd vet. Ideaal als dagelijks beleg bij een actieve leefstijl.",
+    "evidenceGrade": "B",
+    "source": "Voedingscentrum NL",
+    "triggers": {
+      "mealTypes": ["lunch"],
+      "categories": ["beleg"]
+    }
+  },
+  {
+    "id": "kip-mager-eiwit",
+    "type": "voeding",
+    "title": "Kipfilet: meest efficiënte eiwitbron",
+    "body": "100 g kipfilet levert ~31 g eiwit met slechts 3,6 g vet. Dat is de hoogste eiwit-per-calorie verhouding van gangbare vleessoorten.",
+    "evidenceGrade": "A",
+    "source": "NEVO voedingstabel",
+    "triggers": {
+      "categories": ["eiwit"],
+      "mealTypes": ["avondeten"],
+      "workoutTypes": ["hiit", "run"]
+    }
+  },
+  {
+    "id": "tofu-plantaardig-compleet",
+    "type": "voeding",
+    "title": "Tofu + rijst = compleet aminozuurprofiel",
+    "body": "Tofu mist het aminozuur methionine, terwijl rijst het mist in lysine. Samen vormen ze een compleet eiwitprofiel, vergelijkbaar met dierlijk eiwit.",
+    "evidenceGrade": "B",
+    "source": "Voedingswetenschap plantaardige eiwitten",
+    "triggers": {
+      "categories": ["eiwit", "koolhydraten"],
+      "mealTypes": ["avondeten"]
+    }
+  },
+  {
+    "id": "wokgroente-volume-eten",
+    "type": "voeding",
+    "title": "Volume-eten met wokgroenten",
+    "body": "400 g wokgroenten levert slechts ~100 kcal maar vult een half bord. Dit activeert rekreceptoren in je maag, waardoor je sneller verzadigd raakt.",
+    "evidenceGrade": "A",
+    "source": "Energiedichtheid-onderzoek",
+    "triggers": {
+      "categories": ["groente"],
+      "mealTypes": ["avondeten"],
+      "energyRange": [30, 70]
+    }
+  },
+  {
+    "id": "ochtend-eiwit-ontbijt",
+    "type": "training",
+    "title": "Eiwit bij het ontbijt op trainingsdag",
+    "body": "Op trainingsdagen: start met kwark of ei bij het ontbijt. Dit activeert spiereiwitsynthese vroeg in de dag en voorkomt spierafbraak tijdens de sessie.",
+    "evidenceGrade": "B",
+    "source": "Sportvoedingliteratuur",
+    "triggers": {
+      "workoutTypes": ["hiit", "run"],
+      "mealTypes": ["ontbijt"],
+      "categories": ["zuivel"],
+      "timeOfDay": ["morning"]
+    }
+  },
+  {
+    "id": "komkommer-hydratatie",
+    "type": "bereiding",
+    "title": "Komkommer als hydratatiebooster",
+    "body": "Komkommer bestaat voor 96% uit water. Voeg het toe aan je lunch voor extra hydratatie zonder calorieën, vooral handig op warme dagen of na het sporten.",
+    "evidenceGrade": "C",
+    "source": "Praktisch voedingstip",
+    "triggers": {
+      "categories": ["rauwkost"],
+      "mealTypes": ["lunch"],
+      "timeOfDay": ["afternoon"]
+    }
+  }
+]

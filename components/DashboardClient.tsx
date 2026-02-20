@@ -8,6 +8,7 @@ import { LogoutButton } from "@/components/LogoutButton";
 import { PinGate } from "@/components/PinGate";
 import { StoreShoppingList } from "@/components/StoreShoppingList";
 import { ThreeHero } from "@/components/ThreeHero";
+import { TipsPanel } from "@/components/TipsPanel";
 import { WeekBoard } from "@/components/WeekBoard";
 import { MealIcon } from "@/components/FriendlyIcons";
 import { isSessionUnlocked } from "@/lib/client/pin-auth";
@@ -185,6 +186,14 @@ export function DashboardClient() {
           <ThreeHero />
         </div>
       </header>
+
+      <TipsPanel
+        workoutType={today.workoutType}
+        nextMealType={nextMealType as "ontbijt" | "lunch" | "snack" | "avondeten"}
+        todayMeals={today.meals}
+        products={productList}
+        energy={energy}
+      />
 
       <section className="grid gap-4 xl:grid-cols-[1.05fr_0.95fr]">
         <article className="card-lift rounded-xl2 border border-ring/20 bg-card/50 p-4">
